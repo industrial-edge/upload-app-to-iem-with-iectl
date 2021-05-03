@@ -126,10 +126,10 @@ To install the IE Publisher CLI, follow these instructions:
     export COMPOSE_PATH="<path-to-docker-compose>"
     ```
 **Important Notes:**\
-*- Use the production [docker-compose](../src/app/docker-compose.prod.yml) file* \
+*- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file* \
 *- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*
 
-3. When you are finished with modifying shell script, you can start the shell script by running this command: 
+3. When you are finished with modifying shell script, you can start the shell script to tigger the uplaod process by running this command: 
 
     ```bash
     cd .src/
