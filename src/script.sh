@@ -34,6 +34,6 @@ version_new=$(echo $version | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(leng
 echo 'new Version: '$version_new
 
 # Create and upload application version to IEM 
-ie-app-publisher-linux em app cuv -a $APP_ID -v $version_new -y $DOCKER_COMP_PATH -n '{"hello-edge":[{"name":"hello-edge","protocol":"HTTP","port":"80","headers":"","rewriteTarget":"/"}]}' -s 'hello-edge' -t 'FromBoxReverseProxy' -u "hello-edge" -r "/"
+ie-app-publisher-linux em app cuv -a $APP_ID -v $version_new -y $COMPOSE_PATH-n '{"hello-edge":[{"name":"hello-edge","protocol":"HTTP","port":"80","headers":"","rewriteTarget":"/"}]}' -s 'hello-edge' -t 'FromBoxReverseProxy' -u "hello-edge" -r "/"
 ie-app-publisher-linux em app uuv -a $APP_ID -v $version_new
 
