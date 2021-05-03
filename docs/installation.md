@@ -5,6 +5,8 @@
     - [Expose Docker daemon](#expose-docker-daemon)
     - [Install IE Publisher CLI](#install-ie-publisher-cli)
   - [Create project and application in IEM](#create-project-and-application-in-iem)
+  - [Build Docker images](#build-docker-images)
+  - [Customize shell script and upload app to IEM](#customize-shell-script-and-upload-app-to-iem)
   
 
 ## Prerequisites 
@@ -97,3 +99,41 @@ To install the IE Publisher CLI, follow these instructions:
 7. Click on "Create" button. Your application is successfully created.
 
 <img src="graphics/create_app.gif" width="1000"/>
+
+## Build Docker images 
+
+1. Copy the [src](../src) folder with all application files to your Linux device. 
+2. Open up your terminal.
+3. Build docker images by running these commands:
+4. 
+    ```bash
+    cd ./src/app
+    sudo docker-compose build
+    ```
+5. Docker image for the application within this example are build in your local docker engine. 
+
+## Customize shell script and upload app to IEM
+*Note: VS Code is used as a development enviroment*
+
+1. Open the shell [script](../src/script.sh) in your development enviroment. 
+2. In order to succefully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several enviroment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
+
+    ```bash
+    export IE_URL="https://<ip>:9443"
+    export IE_USER="<iem-username>"
+    export IE_PASSWORD="<iem-password>"
+    export APP_ID="<app-ID>"
+    export COMPOSE_PATH="<path-to-docker-compose>"
+    ```
+**Important Notes:**\
+*- Use the production [docker-compose](../src/app/docker-compose.prod.yml) file* \
+*- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*
+
+3. When you are finished with modifying shell script, you can start the shell script by running this command: 
+
+    ```bash
+    cd .src/
+    sh script.sh
+    ```
+4. If your configuration is correct, you should get the notofication that you application was uploaded successfully. 
+

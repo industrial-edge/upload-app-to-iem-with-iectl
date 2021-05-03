@@ -1,3 +1,11 @@
+# Set envriroment variables 
+export IE_URL="https://<ip>:9443"
+export IE_USER="<iem-username>"
+export IE_PASSWORD="<iem-password>"
+export APP_ID="<app-ID>"
+export COMPOSE_PATH="<path-to-docker-compose>"
+
+
 # List IE Publisher CLI version 
 ie-app-publisher-linux -V
 
@@ -14,7 +22,7 @@ ie-app-publisher-linux de c -u http://localhost:2375
 # Portal login
 echo "-----------------------------------------IEM LOGIN--------------------------------------------------------"
 export IE_SKIP_CERTIFICATE=true # DO THIS IN TRUSTED ENVIROMENT ONLY! 
-ie-app-publisher-linux em li -u $IEM_URL -e $IEM_USERNAME -p $IEM_PASSWORD
+ie-app-publisher-linux em li -u $IE_URL -e $IE_USER -p $IE_PASSWORD
 
 echo "-----------------------------------------UPLOAD APP TO IEM------------------------------------------------"
 
