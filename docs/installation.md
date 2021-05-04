@@ -118,14 +118,15 @@ To install the IE Publisher CLI, follow these instructions:
 1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development enviroment. The file structure should be like this: 
 
     ```txt
-    <your-project-directory>
-    │   docker-compose.prod.yml
-    │   docker-compose.yml
-    │   Dockerfile
+    <your-project-directory>/
     │   script.sh
     │
-    └───html
-    │   │   index.html
+    └───app/
+    │   │   docker-compose.prod.yml
+    │   │   docker-compose.yml
+    │   │   Dockerfile
+    │   └───html/
+    │   │   │   index.html
     ```
 
 2. In order to succefully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several enviroment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
