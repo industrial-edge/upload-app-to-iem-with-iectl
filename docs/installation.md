@@ -115,7 +115,19 @@ To install the IE Publisher CLI, follow these instructions:
 ## Customize shell script and upload app to IEM
 *Note: VS Code is used as a development enviroment*
 
-1. Open the shell [script](../src/script.sh) in your development enviroment. 
+1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development enviroment. The file structure should be like this: 
+
+    ```txt
+    <your-project-directory>
+    │   docker-compose.prod.yml
+    │   docker-compose.yml
+    │   Dockerfile
+    │   script.sh
+    │
+    └───html
+    │   │   index.html
+    ```
+
 2. In order to succefully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several enviroment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
 
     ```bash
