@@ -118,7 +118,7 @@ To install the IE Publisher CLI, follow these instructions:
 1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development enviroment. The file structure should be like this: 
 
     ```txt
-    <your-project-directory>/
+    src/
     │   script.sh
     │
     └───app/
