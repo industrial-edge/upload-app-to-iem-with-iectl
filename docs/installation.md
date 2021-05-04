@@ -126,7 +126,7 @@ To install the IE Publisher CLI, follow these instructions:
     │   │   docker-compose.yml
     │   │   Dockerfile
     │   └───html/
-    │   │   │   index.html
+    │       │   index.html
     ```
 
 2. In order to succefully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several enviroment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
