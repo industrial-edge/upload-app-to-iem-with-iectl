@@ -1,6 +1,6 @@
-# Uplaod App to IEM with IE Publisher CLI 
+# Upload App to IEM with IE Publisher CLI 
 
-- [Uplaod App to IEM with IE Publisher CLI](#uplaod-app-to-iem-with-ie-publisher-cli)
+- [Upload App to IEM with IE Publisher CLI](#upload-app-to-iem-with-ie-publisher-cli)
   - [Prerequisites](#prerequisites)
     - [Expose Docker daemon](#expose-docker-daemon)
     - [Install IE Publisher CLI](#install-ie-publisher-cli)
@@ -17,7 +17,7 @@
 
 In order to run shell script for this example, you need to expose docker daemon TCP port 2375. To do that, follow these instructions: 
 
-1. Open terminal on the Linux device. 
+1. Open terminal on your Linux device. 
 2. Use the command sudo systemctl edit docker.service to open an override file for docker.service in a text editor.
 ```bash
 sudo systemctl edit docker.service
@@ -29,7 +29,7 @@ sudo systemctl edit docker.service
 ExecStart=
 ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
 ```
-In this example the API will listen at `127.0.0.1:2375`. You can change the IP according to your setup, eg if you want to reach the docker engine from a external host, enter the external IP of the host.
+In this example the API will listen at `127.0.0.1:2375`. You can change the IP according to your setup, e.g. if you want to reach the docker engine from a external host, enter the external IP of the host.
 
 4. Save the file.
 5. Reload the systemctl configuration.
@@ -46,14 +46,14 @@ sudo docker info
 ```
 The output should state that the API is accessible on your IP and Port.
 
-__Warning__ : Access to the remote API is equivalent to root access on the host. Only do this in a trusted environment.
+__Warning__ : Access to the remote API is equivalent to root access on the host. DO this in trusted environment only.
 
 ### Install IE Publisher CLI 
 
-To install the IE Publisher CLI, follow these instructions: 
+To install the IE Publisher CLI on your Linux device, follow these instructions: 
 
 
-1. Download the IE Publisher CLI executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the file to your device. Extract the files from the zip file. 
+1. Download the IE Publisher CLI executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the zip file to your device. Extract the files from the zip file. 
 
 2. Open terminal in the directory with the IE Publisher CLI and run this command to make the IE Publisher CLI executable.  
 
@@ -113,9 +113,9 @@ To install the IE Publisher CLI, follow these instructions:
 5. Docker image for the application within this example are build in your local docker engine. 
 
 ## Customize shell script and upload app to IEM
-*Note: VS Code is used as a development enviroment*
+*Note: VS Code is used as a development environment*
 
-1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development enviroment. The file structure should be like this: 
+1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development environment. The file structure should be like this: 
 
     ```txt
     src/
@@ -129,7 +129,7 @@ To install the IE Publisher CLI, follow these instructions:
     │       │   index.html
     ```
 
-2. In order to succefully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several enviroment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
+2. In order to successfully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several environment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
 
     ```bash
     export IE_URL="https://<ip>:9443"
@@ -139,14 +139,14 @@ To install the IE Publisher CLI, follow these instructions:
     export COMPOSE_PATH="<path-to-docker-compose>"
     ```
 **Important Notes:**\
-*- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file* \
+*- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file for the COMPOSE_PATH variable* \
 *- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*
 
-3. When you are finished with modifying shell script, you can start the shell script to tigger the uplaod process by running this command: 
+3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command: 
 
     ```bash
     cd .src/
     sh script.sh
     ```
-4. If your configuration is correct, you should get the notofication that you application was uploaded successfully. 
+4. If your configuration is correct, you should get the notification that you application was uploaded successfully. 
 
