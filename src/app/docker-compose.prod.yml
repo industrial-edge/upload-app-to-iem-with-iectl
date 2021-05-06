@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   hello-edge:
-    image: hello-edge
+    image: hello-edge:0.0.1
     mem_limit: 200mb
     restart: always
     volumes:
