@@ -41,7 +41,7 @@ The main goal of this example is to show how to create shell script  with CLI co
 
 ## Installation steps
 
-To create shell script with IE Publisher CLI commands to automatically upload app to IEM, follow the steps in [docs](../docs/installation.md). The documentation describes how to install IE Publisher CLI on Ubuntu distribution version of Linux and how to run a shell script to upload new application version to your IEM. The application used for this example is a simple web server hosting by nginx.
+To create shell script with IE Publisher CLI commands to automatically upload app to IEM, follow the steps in [docs](./docs/installation.md). The documentation describes how to install IE Publisher CLI on Ubuntu distribution version of Linux and how to run a shell script to upload new application version to your IEM. The application used for this example is a simple web server hosting by nginx.
 
 ## Documentation
 
