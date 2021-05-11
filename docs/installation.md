@@ -143,7 +143,7 @@ To install the IE Publisher CLI on your Linux device, follow these instructions:
     export IE_USER="<iem-username>"
     export IE_PASSWORD="<iem-password>"
     export APP_ID="<app-ID>"
-    export COMPOSE_PATH="<path-to-docker-compose>"
+    export COMPOSE_PATH="<path-to-docker-compose>/docker-compose.prod.yml"
     ```
 
 **Important Notes:**\
