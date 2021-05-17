@@ -1,9 +1,9 @@
-# Upload App to IEM with IE Publisher CLI
+# Upload App to IEM with IE App Publisher CLI
 
-- [Upload App to IEM with IE Publisher CLI](#upload-app-to-iem-with-ie-publisher-cli)
+- [Upload App to IEM with IE App Publisher CLI](#upload-app-to-iem-with-ie-app-publisher-cli)
   - [Prerequisites](#prerequisites)
     - [Expose Docker daemon](#expose-docker-daemon)
-    - [Install IE Publisher CLI](#install-ie-publisher-cli)
+    - [Install IE App Publisher CLI](#install-ie-app-publisher-cli)
   - [Create project and application in IEM](#create-project-and-application-in-iem)
   - [Build Docker images](#build-docker-images)
   - [Customize shell script and upload app to IEM](#customize-shell-script-and-upload-app-to-iem)
@@ -16,7 +16,7 @@
 
 In order to run shell script for this example, you need to expose docker daemon TCP port 2375. To do that, follow these instructions:
 
-1. Open terminal on your Linux device. 
+1. Open terminal on your Linux VM. 
 2. Use the command sudo systemctl edit docker.service to open an override file for docker.service in a text editor.
 
 ```bash
@@ -55,19 +55,19 @@ The output should state that the API is accessible on your IP and Port.
 
 __Warning__ : Access to the remote API is equivalent to root access on the host. DO this in trusted environment only.
 
-### Install IE Publisher CLI 
+### Install IE App Publisher CLI 
 
-To install the IE Publisher CLI on your Linux device, follow these instructions:
+To install the IE App Publisher CLI on your Linux VM, follow these instructions:
 
-1. Download the IE Publisher CLI executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the zip file to your device. Extract the files from the zip file.
+1. Download the IE App Publisher CLI executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the zip file to your device. Extract the files from the zip file.
 
-2. Open terminal in the directory with the IE Publisher CLI and run this command to make the IE Publisher CLI executable.  
+2. Open terminal in the directory with the IE App Publisher CLI and run this command to make the IE App Publisher CLI executable.  
 
     ```bash
     sudo install ./ie-app-publisher-linux /usr/bin/
     ```
 
-3. If you see the publisher CLI version number, you have successfully installed IE Publisher CLI on your device. 
+3. If you see the IE App Publisher CLI version number, you have successfully installed IE App Publisher CLI on your device. 
 
 ## Create project and application in IEM
 
@@ -107,7 +107,7 @@ To install the IE Publisher CLI on your Linux device, follow these instructions:
 
 ## Build Docker images
 
-1. Copy the [src](../src) folder with all application files to your Linux device. 
+1. Copy the [src](../src) folder with all application files to your Linux VM. 
 2. Open up your terminal.
 3. Build docker images by running these commands:
 
@@ -147,8 +147,9 @@ To install the IE Publisher CLI on your Linux device, follow these instructions:
     ```
 
 **Important Notes:**\
-*- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file for the COMPOSE_PATH variable* \
-*- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*
+*- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file with **Absolute Path** for the COMPOSE_PATH variable* \
+*- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*\
+*- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!*
 
 3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command:
 
