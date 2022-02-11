@@ -34,7 +34,7 @@ The main goal of this example is to show how to create shell script  with CLI co
 ### Used components
 
 - Industrial Edge Device V 1.2.0-56
-- Industrial Edge Management V 1.2.14
+- Industrial Edge Management V 1.2.16
 - IE App Publisher CLI V 1.2.8
 - VM Ubuntu 20.04
 - Docker 19.03.13
