@@ -5,7 +5,9 @@
     - [Expose Docker daemon](#expose-docker-daemon)
     - [Install IE App Publisher CLI](#install-ie-app-publisher-cli)
   - [Create project and application in IEM](#create-project-and-application-in-iem)
-  - [Build Docker images](#build-docker-images)
+  - [Build application](#build-application)
+    - [Download Repository](#download-repository)
+    - [Build docker image](#build-docker-image)
   - [Customize shell script and upload app to IEM](#customize-shell-script-and-upload-app-to-iem)
   
 ## Prerequisites
@@ -105,18 +107,31 @@ To install the IE App Publisher CLI on your Linux VM, follow these instructions:
 7. Click on "Create" button. Your application is successfully created.
 <img src="graphics/create_app.gif" width="1000"/>
 
-## Build Docker images
+## Build application
 
-1. Copy the [src](../src) folder with all application files to your Linux VM. 
-2. Open up your terminal.
-3. Build docker images by running these commands:
+### Download Repository
 
-    ```bash
-    cd ./src/app
-    sudo docker-compose build
-    ```
+Download or clone the repository source code to your workstation.  
+![Github Clone Section](graphics/clonerepo.png)
 
-4. Docker image for the application within this example are build in your local docker engine. 
+
+* Trough terminal:
+```bash
+git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-cli.git
+```
+
+* Trough VSCode:  
+<kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`:
+
+![VS Code Git Clone command](graphics/git.png)
+
+### Build docker image
+
+- Navigate into `src/app` and find the file named `Dockerfile.example`. The `Dockerfile.example` is an example Dockerfile that can be used to build the docker image(s) of the service(s) that runs in this application example. If you choose to use these, rename them to `Dockerfile` before proceeding
+- Open a console in the root folder (where the `docker-compose` file is)
+- Use the `docker compose build` (replaces the older `docker-compose build`) command to build the docker image of the service which is specified in the docker-compose.yml file.
+- These Docker images can now be used to build your app with the Industrial Edge App Publisher
+- `docker images` can be used to check for the images
 
 ## Customize shell script and upload app to IEM
 
