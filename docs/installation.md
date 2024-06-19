@@ -1,9 +1,9 @@
-# Upload App to IEM with IE App Publisher CLI
+# Upload App to IEM with IECTL
 
-- [Upload App to IEM with IE App Publisher CLI](#upload-app-to-iem-with-ie-app-publisher-cli)
+- [Upload App to IEM with IECTL](#upload-app-to-iem-with-iectl)
   - [Prerequisites](#prerequisites)
     - [Expose Docker daemon](#expose-docker-daemon)
-    - [Install IE App Publisher CLI](#install-ie-app-publisher-cli)
+    - [Install IECTL](#install-iectl)
   - [Create project and application in IEM](#create-project-and-application-in-iem)
   - [Build application](#build-application)
     - [Download Repository](#download-repository)
@@ -57,19 +57,21 @@ The output should state that the API is accessible on your IP and Port.
 
 __Warning__ : Access to the remote API is equivalent to root access on the host. DO this in trusted environment only.
 
-### Install IE App Publisher CLI 
+### Install IECTL 
 
-To install the IE App Publisher CLI on your Linux VM, follow these instructions:
+To install the IECTL on your Linux VM, follow these instructions:
 
-1. Download the IE App Publisher CLI executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the zip file to your device. Extract the files from the zip file.
+1. Download the IECTL executable file from [Industrial Edge Hub](https://iehub.eu1.edge.siemens.cloud/downloads) and copy the zip file to your device. Extract the files from the zip file.
 
-2. Open terminal in the directory with the IE App Publisher CLI and run this command to make the IE App Publisher CLI executable.  
+2. Open terminal in the directory with the IECTL and run this command to make the IECTL executable.  
 
     ```bash
-    sudo install ./ie-app-publisher-linux /usr/bin/
+    chmod +x iectl
+    sudo mv iectl /usr/local/bin
+    iectl version
     ```
 
-3. If you see the IE App Publisher CLI version number, you have successfully installed IE App Publisher CLI on your device. 
+3. If you see the IECTL version number, you have successfully installed IECTL on your device. 
 
 ## Create project and application in IEM
 
@@ -130,7 +132,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 - Navigate into `src/app` and find the file named `Dockerfile.example`. The `Dockerfile.example` is an example Dockerfile that can be used to build the docker image(s) of the service(s) that runs in this application example. If you choose to use these, rename them to `Dockerfile` before proceeding
 - Open a console in the root folder (where the `docker-compose` file is)
 - Use the `docker compose build` (replaces the older `docker-compose build`) command to build the docker image of the service which is specified in the docker-compose.yml file.
-- These Docker images can now be used to build your app with the Industrial Edge App Publisher
+- These Docker images can now be used to build your app with the IECTL
 - `docker images` can be used to check for the images
 
 ## Customize shell script and upload app to IEM
@@ -140,37 +142,48 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 1. Open the shell [script](../src/script.sh) within the [src](../src) folder in your development environment. The file structure should be like this: 
 
     ```txt
-    src/
-    │   script.sh
-    │
-    └───app/
-    │   │   docker-compose.prod.yml
-    │   │   docker-compose.yml
-    │   │   Dockerfile
-    │   └───html/
-    │       │   index.html
+    ├── app
+    │   ├── docker-compose.prod.yml
+    │   ├── docker-compose.yml
+    │   └── web
+    │       ├── Dockerfile.example
+    │       └── html
+    │           └── index.html
+    ├── appicon
+    │   └── icon.png
+    ├── script
+    │   ├── getAppId.py
+    │   ├── getAppVersion.py
+    │   └── getDeviceId.py
+    ├── script.sh
+
     ```
 
 2. In order to successfully upload this application to your IEM, you need to modify the provided shell script. You can do this by setting several environment variables in the beginning of [script](../src/script.sh) by modifying variables in angle brackets:  
 
     ```bash
-    export IE_URL="https://<ip>:9443"
-    export IE_USER="<iem-username>"
-    export IE_PASSWORD="<iem-password>"
-    export APP_ID="<app-ID>"
-    export COMPOSE_PATH="<path-to-docker-compose>/docker-compose.prod.yml"
+    # IEM configuration variables export IEM_USER="ivan.castro-bernaza@siemens.com"
+    export IEM_USER="<iem_user>"
+    export IEM_URL="<iem_URL>"
+
+    # Application configuration variables
+    export APP_NAME="<App_name>" # Application name
+    export APP_REPO="<App_repo>" # Applications repository (unique)
+
+    export PROJECT_PATH_PREFIX="<Absolute Path to src files>" # Prefix of the absolute path where the project is inside of your development environment
+
     ```
 
 **Important Notes:**\
 *- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file with **Absolute Path** for the COMPOSE_PATH variable* \
-*- App ID can be found in IEM under "My Projects -> Application Details -> Show Keys"*\
 *- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!*
+*- Create a folder named "workspace" on src/ before execute the script.sh"
 
 3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command:
 
     ```bash
-    cd .src/
-    sh script.sh
+    cd src/
+    ./script.sh
     ```
 
 4. If your configuration is correct, you should get the notification that you application was uploaded successfully.
