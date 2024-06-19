@@ -4,7 +4,6 @@
   - [Prerequisites](#prerequisites)
     - [Expose Docker daemon](#expose-docker-daemon)
     - [Install IECTL](#install-iectl)
-  - [Create project and application in IEM](#create-project-and-application-in-iem)
   - [Build application](#build-application)
     - [Download Repository](#download-repository)
     - [Build docker image](#build-docker-image)
@@ -134,7 +133,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 
 **Important Notes:**\
 *- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file with **Absolute Path** for the COMPOSE_PATH variable* \
-*- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!*
+*- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!* \
 *- Create a folder named "workspace" on src/ before execute the script.sh"*
 
 3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command:
