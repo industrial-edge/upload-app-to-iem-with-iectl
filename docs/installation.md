@@ -73,49 +73,9 @@ To install the IECTL on your Linux VM, follow these instructions:
 
 3. If you see the IECTL version number, you have successfully installed IECTL on your device. 
 
-## Create project and application in IEM
-
-*Prerequisites:*\
-*- IEM installed and configured*
-
-1. Go to the "Applications" section of your Edge Management.
-
-2. Click on "Create Project" button in the right upper corner.
-
-3. Provide necessary information for your project
-
-    ```txt
-    - Project Name
-    - Description 
-    - Company information (if needed)
-    ```
-
-4. Click on "Create" to create the project.
-
-<img src="graphics/create_project.gif" width="1000"/>
-
-5. Go to your created project and click on "Create application"
-
-6. Fill in the form for your application
-
-    ```txt
-    - Application Name 
-    - Repository Name
-    - Website
-    - Description
-    - Select icon
-    ```
-
-7. Click on "Create" button. Your application is successfully created.
-<img src="graphics/create_app.gif" width="1000"/>
-
 ## Build application
 
 ### Download Repository
-
-Download or clone the repository source code to your workstation.  
-![Github Clone Section](graphics/clonerepo.png)
-
 
 * Trough terminal:
 ```bash
@@ -123,9 +83,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 ```
 
 * Trough VSCode:  
-<kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`:
-
-![VS Code Git Clone command](graphics/git.png)
+<kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`
 
 ### Build docker image
 
@@ -177,7 +135,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 **Important Notes:**\
 *- Use the production [docker-compose.prod.yml](../src/app/docker-compose.prod.yml) file with **Absolute Path** for the COMPOSE_PATH variable* \
 *- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!*
-*- Create a folder named "workspace" on src/ before execute the script.sh"
+*- Create a folder named "workspace" on src/ before execute the script.sh"*
 
 3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command:
 
