@@ -1,7 +1,7 @@
-# Upload app to IEM with IE App Publisher CLI
+# Upload app to IEM with IECTL
 
-Automate process of uploading apps to IEM using IE App Publisher CLI.
-- [Upload app to IEM with IE App Publisher CLI](#upload-app-to-iem-with-ie-app-publisher-cli)
+Automate process of uploading apps to IEM using IECTL.
+- [Upload app to IEM with IECTL](#upload-app-to-iem-with-iectl)
   - [Description](#description)
     - [Overview](#overview)
     - [General task](#general-task)
@@ -18,11 +18,11 @@ Automate process of uploading apps to IEM using IE App Publisher CLI.
 
 ### Overview
 
-This application example shows how to use IE App Publisher CLI to automatically upload applications to the Industrial Edge Management.
+This application example shows how to use IECTL to automatically upload applications to the Industrial Edge Management.
 
 ### General task
 
-The main goal of this example is to show how to create shell script  with CLI commands to automatically upload applications to IEM. Provided shell script can run as a standalone script, in docker image or can be even implemented in CI/CD pipeline.
+The main goal of this example is to show how to create shell script with CLI commands to automatically upload applications to IEM. Provided shell script can run as a standalone script, in docker image or can be even implemented in CI/CD pipeline.
 
 ## Requirements
 
@@ -35,14 +35,14 @@ The main goal of this example is to show how to create shell script  with CLI co
 ### Used components
 
 - Industrial Edge Device V 1.2.0-56
-- Industrial Edge Management V 1.2.16
-- IE App Publisher CLI V 1.2.8
+- Industrial Edge Management V 1.5.5-2
+- IECTL V 2.7.10
 - VM Ubuntu 20.04
-- Docker 19.03.13
+- Docker 20.10.17
 
 ## Installation steps
 
-To create shell script with IE App Publisher CLI commands to automatically upload app to IEM, follow the steps in [docs](./docs/installation.md). The documentation describes how to install IE App Publisher CLI on Ubuntu distribution version of Linux and how to run a shell script to upload new application version to your IEM. The application used for this example is a simple web server hosting by nginx.
+To create shell script with IECTL commands to automatically upload app to IEM, follow the steps in [docs](./docs/installation.md). The documentation describes how to install IECTL on Ubuntu distribution version of Linux and how to run a shell script to upload new application version to your IEM. The application used for this example is a simple web server hosting by nginx.
 
 ## Documentation
  

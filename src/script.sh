@@ -1,50 +1,66 @@
-# Copyright 2020 Siemens AG
-# This file is subject to the terms and conditions of the MIT License.  
-# See LICENSE file in the top-level directory.
+#DON'T FORGET TO BUILD THE IMAGE BEFORE
 
-# Set envriroment variables 
-export IE_URL="https://<ip>:9443"
-export IE_USER="<iem-username>"
-export IE_PASSWORD="<iem-password>"
-export APP_ID="<app-ID>"
-export COMPOSE_PATH="<path-to-docker-compose>/docker-compose.prod.yml"
+# IEM configuration variables export IEM_USER="ivan.castro-bernaza@siemens.com"
+export IEM_USER="<iem_user>"
+export IEM_URL="<iem_URL>"
 
+# Application configuration variables
+export APP_NAME="<App_name>" # Application name
+export APP_REPO="<App_repo>" # Applications repository (unique)
 
-# List IE Publisher CLI version 
-ie-app-publisher-linux -V
+# IECTL environmental variables
+export IE_SKIP_CERTIFICATE=true
+export EDGE_SKIP_TLS=1
 
-# Workspace initialization
-echo "-----------------------------------------INIT WORKSPACE---------------------------------------------------"
-mkdir workspace 
-cd workspace 
-ie-app-publisher-linux ws i
-
-# Connection to docker engine 
-echo "-----------------------------------------CONNECT TO DOCKER ENGINE-----------------------------------------"
-ie-app-publisher-linux de c -u http://localhost:2375
-
-# Portal login
-echo "-----------------------------------------IEM LOGIN--------------------------------------------------------"
-export IE_SKIP_CERTIFICATE=true # DO THIS IN TRUSTED ENVIROMENT ONLY! 
-ie-app-publisher-linux em li -u $IE_URL -e $IE_USER -p $IE_PASSWORD
-
-echo "-----------------------------------------UPLOAD APP TO IEM------------------------------------------------"
-
-# application version management
-version=$(ie-app-publisher-linux em app dt -a $APP_ID -p | \
-        python3 -c "import sys, json; print(json.load(sys.stdin)['versions'][0]['versionNumber'])")
-
-if [ -z "$version" ]
-then
-    version_new=0.0.1
-    echo 'New application created with version: '$version_new
-else
-    echo 'old Version: '$version
-    version_new=$(echo $version | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
-    echo 'new Version: '$version_new
-fi
+# Project envirinmental variables 
+export PROJECT_PATH_PREFIX="<Absolute Path to src files>" # Prefix of the absolute path where the project is inside of your development environment
 
 
-# Create and upload application version to IEM 
-ie-app-publisher-linux em app cuv -a $APP_ID -v $version_new -y $COMPOSE_PATH -n '{"hello-edge":[{"name":"hello-edge","protocol":"HTTP","port":"80","headers":"","rewriteTarget":"/"}]}' -s 'hello-edge' -t 'FromBoxReverseProxy' -u "hello-edge" -r "/"
-ie-app-publisher-linux em app uuv -a $APP_ID -v $version_new
+echo "---------------------------Creating publisher configuration---------------------------"
+iectl config add publisher \
+    --name "publisherdev" \
+    --dockerurl "http://127.0.0.1:2375" \
+    --workspace "$PROJECT_PATH_PREFIX/workspace" 
+
+echo "---------------------------Initializing workspace---------------------------"
+cd workspace
+iectl publisher workspace init
+
+echo "---------------------------Creating application---------------------------"
+iectl publisher standalone-app create \
+            --reponame $APP_REPO \
+            --appdescription "application description"  \
+            --iconpath "$PROJECT_PATH_PREFIX/appicon/icon.png" \
+            --appname $APP_NAME
+
+echo "---------------------------Creating application version---------------------------"
+# Version managment 
+version=$(iectl publisher standalone-app version list -a $APP_NAME -k "versionNumber" | \
+        python3 $PROJECT_PATH_PREFIX/script/getAppVersion.py)
+
+version_new=$(echo $version | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}')
+echo 'new Version: '$version_new
+
+iectl publisher standalone-app version create \
+            --appname $APP_NAME \
+            --changelogs "initial release" \
+            --yamlpath "$PROJECT_PATH_PREFIX/app/docker-compose.prod.yml" \
+            --versionnumber $version_new \
+            -n '{"hello-edge":[{"name":"hello-edge","protocol":"HTTP","port":"80","headers":"","rewriteTarget":"/"}]}' \
+            -s "hello-edge" \
+            -t "FromBoxReverseProxy" \
+            -u "hello-edge" \
+            -r "/"
+
+echo "---------------------------Creating IEM configuration---------------------------"
+iectl config add iem  \
+         --name "iemdev" \
+         --url $IEM_URL \
+         --user $IEM_USER \
+         --password $IEM_PASSWORD  
+
+echo "---------------------------Uploading app to IEM---------------------------"
+iectl publisher app-project upload catalog \
+        --appname $APP_NAME \
+        -v $version_new
+
