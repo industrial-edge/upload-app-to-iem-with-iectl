@@ -3,6 +3,7 @@
 # IEM configuration variables export IEM_USER="ivan.castro-bernaza@siemens.com"
 export IEM_USER="<iem_user>"
 export IEM_URL="<iem_URL>"
+export IEM_PASSWORD="<iem_password>"
 
 # Application configuration variables
 export APP_NAME="<App_name>" # Application name
