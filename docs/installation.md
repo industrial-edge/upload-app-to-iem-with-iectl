@@ -64,8 +64,6 @@ To install the IECTL on your Linux VM, follow these instructions:
 
 ![EdgeHubDownloadSoftware](../src/appicon/EdgeHubDownloadSoftware.png)
 
-
-
 2. Open terminal in the directory with the IECTL file and run this command to make the IECTL executable.  
 
     ```bash
@@ -87,9 +85,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 
 * Trough VSCode:  
    - <kbd>CTRL</kbd>+<kbd>&uarr; SHIFT</kbd>+<kbd>P</kbd> or <kbd>F1</kbd> to open VSCode's command pallette and type `git clone`
-  - Under "Source Control", then the three dots in the upper-right corner of the source control tree and "Clone":![GitClone](../src/appicon/GitClone.png)
-  
-
+   - Under "Source Control", then the three dots in the upper-right corner of the source control tree and "Clone":![GitClone](../src/appicon/GitClone.png)
 
 ### Build docker image
 
@@ -131,15 +127,15 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
     export IEM_URL="<iem_URL>"
     export IEM_PASSWORD="<iem_password>"
 
+
     # Application configuration variables
     export APP_NAME="<App_name>" # Application name
     export APP_REPO="<App_repo>" # Applications repository (unique)
 
     # IECTL environmental variables
     export IE_SKIP_CERTIFICATE=true
-    export EDGE_SKIP_TLS=1
-    
-    # Project envirinmental variables 
+    export EDGE_SKIP_TLS=1    
+    # Project environmental variables 
     export PROJECT_PATH_PREFIX="<Absolute Path to src files>" # Prefix of the absolute path where the project is inside of your development environment
 
     ```
@@ -150,6 +146,7 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
 *- Setting IE_SKIP_CERTIFICATE environmental variable will skip the certificates check by your server and therefore use this in trusted environment only!* \
 *- Create a folder named "workspace" on src/ before execute the script.sh*. If you created already one and want to do it from the beginning, delete the whole workspace folder and everything in it and create a new empty one.
 
+
 3. When you are finished with modifying shell script, you can start the shell script to trigger the upload process by running this command:
 
     ```bash
@@ -158,4 +155,5 @@ git clone https://github.com/industrial-edge/upload-app-to-iem-ie-app-publisher-
     ```
 
 4. If your configuration is correct, you should get the notification that you application was uploaded successfully.
+
 
